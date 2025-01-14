@@ -7,8 +7,8 @@
  * @len: number of bytes to hashed.
  * @digest: buffer to store the hash result.
  *
- * Author: Frank Onyema Orji.
- * Return: pointer to digest or Null if errors occurs
+ * Author: David Okonkwo
+ * Return: pointer to digest or Null on error
  */
 
 uint8_t *sha256(int8_t const *s, size_t len,
