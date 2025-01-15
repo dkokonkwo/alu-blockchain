@@ -9,7 +9,7 @@ blockchain_t *blockchain_create(void)
 {
     llist_t *llist;
     blockchain_t *nblockchain;
-    block_t *nblock = (block_t *)malloc(sizeof(*block_t));
+    block_t *nblock = (block_t *)malloc(sizeof(block_t));
     if (!nblock)
         return (NULL);
     nblock->info.index = 0;
@@ -32,7 +32,7 @@ blockchain_t *blockchain_create(void)
         free(nblock);
         return (NULL);
     }
-    nblockchain = (blockchain_t *)malloc(sizeof(*blockchain_t));
+    nblockchain = (blockchain_t *)malloc(sizeof(blockchain_t));
     if (!nblockchain)
     {
         llist_destroy(llist, 1, NULL);
