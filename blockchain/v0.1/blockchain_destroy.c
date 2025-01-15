@@ -17,7 +17,7 @@ temp = current;
 block_destroy(temp);
 current = llist_pop(blockchain->chain);
 }
-llist_destroy(blockchain->chain, 0, NULL)
+llist_destroy(blockchain->chain, 0, NULL);
 free(blockchain);
 return;
 }
