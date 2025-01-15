@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <stdint.h>
 #include <string.h>
 #include <stdint.h>
 #include <llist.h>
@@ -80,4 +82,5 @@ typedef struct block_s
 
 
 blockchain_t *blockchain_create(void);
+block_t *block_create(block_t const *prev, int8_t const *data, uint32_t data_len);
 #endif /* BLOCKCHAIN_H */
