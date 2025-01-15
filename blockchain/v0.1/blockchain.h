@@ -79,4 +79,5 @@ typedef struct block_s
 } block_t;
 
 
+blockchain_t *blockchain_create(void);
 #endif /* BLOCKCHAIN_H */
