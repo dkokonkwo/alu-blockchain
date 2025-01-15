@@ -11,49 +11,43 @@
  */
 blockchain_t *blockchain_create(void)
 {
-blockchain_t *nblockchain = NULL;
-block_t *nblock = NULL;
-llist_t *llist = NULL;
-nblock = (block_t *)malloc(sizeof(block_t));
-if (!nblock)
-{
-fprintf(stderr, "Failed to allocate memory for genesis block\n");
-return (NULL);
-}
-nblock->info.index = 0;
-nblock->info.difficulty = 0;
-nblock->info.nonce = 0;
-nblock->info.timestamp = GENESIS_TIMESTAMP;
-memset(nblock->info.prev_hash, 0, SHA256_DIGEST_LENGTH);
-memcpy(nblock->data.buffer, GENESIS_DATA, GENESIS_DATA_LEN);
-nblock->data.len = GENESIS_DATA_LEN;
-memcpy(nblock->hash, GENESIS_HASH, SHA256_DIGEST_LENGTH);
+	blockchain_t *blockchain = NULL;
+	block_t *genesis_block = NULL;
+	llist_t *llist = NULL;
 
-llist = llist_create(MT_SUPPORT_TRUE);
-if (!llist)
-{
-fprintf(stderr, "Failed to create blockchain list\n");
-free(nblock);
-return (NULL);
-}
+	genesis_block = calloc(1, sizeof(*genesis_block));
+	if (genesis_block == NULL)
+		return (NULL);
 
-if (llist_add_node(llist, nblock, ADD_NODE_FRONT) != 0)
-{
-fprintf(stderr, "Failed to add genesis block to blockchain list\n");
-llist_destroy(llist, 1, NULL);
-free(nblock);
-return (NULL);
-}
+	genesis_block->info.index = 0;
+	genesis_block->info.difficulty = 0;
+	genesis_block->info.timestamp = 1537578000;
+	genesis_block->info.nonce = 0;
+	memset(genesis_block->info.prev_hash, 0, SHA256_DIGEST_LENGTH);
+	memcpy(genesis_block->data.buffer, GENESIS_TIMESTAMP, GENESIS_DATA_LEN);
+	genesis_block->data.len = GENESIS_DATA_LEN;
+	memcpy(genesis_block->hash, HASH, SHA256_DIGEST_LENGTH);
 
-nblockchain = (blockchain_t *)malloc(sizeof(blockchain_t));
-if (!nblockchain)
-{
-fprintf(stderr, "Failed to allocate memory for blockchain structure\n");
-llist_destroy(llist, 1, NULL);
-free(nblock);
-return (NULL);
-}
-nblockchain->chain = llist;
-return (nblockchain);
-}
+	llist = llist_create(MT_SUPPORT_TRUE);
+	if (llist == NULL)
+	{
+		free(genesis_block);
+		return (NULL);
+	}
 
+	if (llist_add_node(llist, genesis_block, ADD_NODE_FRONT) != 0)
+	{
+		llist_destroy(llist, 1, NULL), free(genesis_block);
+		return (NULL);
+	}
+
+	blockchain = calloc(1, sizeof(*blockchain));
+	if (blockchain == NULL)
+	{
+		llist_destroy(llist, 1, NULL), free(genesis_block);
+		return (NULL);
+	}
+	blockchain->chain = llist;
+
+	return (blockchain);
+}
