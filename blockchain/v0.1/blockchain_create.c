@@ -47,7 +47,6 @@ blockchain_t *blockchain_create(void)
         return (NULL);
     }
 
-    // Allocate memory for the blockchain structure
     nblockchain = (blockchain_t *)malloc(sizeof(blockchain_t));
     if (!nblockchain)
     {
