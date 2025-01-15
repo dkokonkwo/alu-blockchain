@@ -8,7 +8,7 @@
 blockchain_t *blockchain_create(void)
 {
     llist_t *llist;
-    blockchain_t *nblockchain = NULL;
+    blockchain_t *nblockchain;
     block_t *nblock = (block_t *)malloc(sizeof(block_t));
     if (!nblock)
         return (NULL);
@@ -16,7 +16,7 @@ blockchain_t *blockchain_create(void)
     nblock->info.difficulty = 0;
     nblock->info.nonce = 0;
     nblock->info.timestamp = 1537578000;
-    nblock->info.prev_hash = {0};
+    memset(nblock->info.prev_hash, 0, SHA256_DIGEST_LENGTH);
     nblock->data.buffer = "Holberton School";
     nblock->data.len = 16;
     memcpy(nblock->hash, HASH, SHA256_DIGEST_LENGTH);
@@ -28,14 +28,14 @@ blockchain_t *blockchain_create(void)
     }
     if (llist_add_node(llist, nblock, ADD_NODE_FRONT) != 0)
     {
-        llist_destroy(llist);
+        llist_destroy(llist, 1, NULL);
         free(nblock);
         return (NULL);
     }
     nblockchain = (blockchain_t *)malloc(sizeof(blockchain_t));
     if (!nblockchain)
     {
-        llist_destroy(llist);
+        llist_destroy(llist, 1, NULL);
         free(nblock);
         return (NULL);
     }
