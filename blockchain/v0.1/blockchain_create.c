@@ -21,10 +21,10 @@ blockchain_t *blockchain_create(void)
 
 	genesis_block->info.index = 0;
 	genesis_block->info.difficulty = 0;
-	genesis_block->info.timestamp = 1537578000;
+	genesis_block->info.timestamp = GENESIS_TIMESTAMP;
 	genesis_block->info.nonce = 0;
 	memset(genesis_block->info.prev_hash, 0, SHA256_DIGEST_LENGTH);
-	memcpy(genesis_block->data.buffer, GENESIS_TIMESTAMP, GENESIS_DATA_LEN);
+	memcpy(genesis_block->data.buffer, GENESIS_DATA, GENESIS_DATA_LEN);
 	genesis_block->data.len = GENESIS_DATA_LEN;
 	memcpy(genesis_block->hash, HASH, SHA256_DIGEST_LENGTH);
 
