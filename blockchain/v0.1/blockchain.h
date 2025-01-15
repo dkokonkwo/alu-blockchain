@@ -5,7 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-#include "llist.h"
+#include <llist.h>
+
+#include <openssl/sha.h>
 
 /**
  * struct blockchain_s - Blockchain structure
