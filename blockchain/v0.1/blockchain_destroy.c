@@ -10,12 +10,12 @@ void blockchain_destroy(blockchain_t *blockchain)
 block_t *current, *temp;
 if (!blockchain)
 return;
-block = llist_pop(blockchain->chain);
-while (block)
+current = llist_pop(blockchain->chain);
+while (current)
 {
-temp = block;
+temp = current;
 block_destroy(temp);
-block = llist_pop(blockchain->chain);
+current = llist_pop(blockchain->chain);
 }
 llist_destroy(blockchain->chain, 0, NULL)
 free(blockchain);
