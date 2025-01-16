@@ -12,7 +12,7 @@
 blockchain_t *blockchain_deserialize(char const *path)
 {
 int fd;
-blockchain_t *blockchain = NULL;
+blockchain_t *chain = NULL;
 uint8_t endianness;
 char buf[4096] = {0};
 uint32_t size;
