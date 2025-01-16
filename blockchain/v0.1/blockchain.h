@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <llist.h>
+#include "../../crypto/hblk_crypto.h"
 
 #include <openssl/sha.h>
 
