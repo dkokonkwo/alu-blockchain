@@ -1,7 +1,7 @@
 #include "blockchain.h"
 
 #define CLEAN_UP (free(chain), close(fd))
-#define CLEAN_UP_BLOCKS (free(block), llist_destroy(list, i, NULL))
+#define CLEAN_UP_BLOCKS (free(block), llist_destroy(list, 1, NULL))
 #define CHECK_ENDIAN(x) (endianness ? SWAPENDIAN(x) : (void)0)
 
 /**
@@ -14,7 +14,7 @@ blockchain_t *blockchain_deserialize(char const *path)
 int fd;
 blockchain_t *blockchain = NULL;
 uint8_t endianness;
-char buff[4096] = {0};
+char buf[4096] = {0};
 uint32_t size;
 
 if (!path)

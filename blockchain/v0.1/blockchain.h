@@ -14,6 +14,7 @@
 #include "provided/endianness.h"
 
 #include <fcntl.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 #define BLOCKCHAIN_DATA_MAX 1024
