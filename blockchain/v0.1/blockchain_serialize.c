@@ -25,7 +25,7 @@ file = fopen(path, "w");
 if (!file)
 return (-1);
 
-fwrite(&fHeader, sizeof(fHeader), 1 , file);
+fwrite(&fHeader, sizeof(fHeader), 1, file);
 
 llist_for_each(blockchain->chain, (node_func_t)block_serialize, file);
 
