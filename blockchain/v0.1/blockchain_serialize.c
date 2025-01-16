@@ -40,4 +40,19 @@ return (0);
  * @arg: file descriptor
  * Return: 0 on success else -1 on failure
  */
+int block_serialize(llist_node_t nptr, int idx, void *arg)
+{
+block_t *block = (block_t *)nptr;
+FILE *file = (FILE *)arg;
 
+if (!block || !file)
+return (-1);
+
+(void)idx;
+
+fwrite((void *)&block->info, sizeof(block->info), 1, file);
+fwrite((void *)&block->data.len, sizeof(block->data.len), 1, file);
+fwrite(block->data.buffer, block->data.len, 1, file);
+fwrite(block->hash, sizeof(block->hash), 1, file);
+return (sizeof(*block));
+}
