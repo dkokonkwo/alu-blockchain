@@ -113,6 +113,7 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 int block_serialize(llist_node_t nptr, int idx, void *arg);
 blockchain_t *blockchain_deserialize(char const *path);
 llist_t *deserialize_blocks(int fd, uint32_t size, uint8_t endianness);
+int block_is_valid(block_t const *block, block_t const *prev_block);
 
 extern block_t const _genesis;
 #endif /* BLOCKCHAIN_H */
