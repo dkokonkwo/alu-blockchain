@@ -84,6 +84,21 @@ typedef struct block_s
     uint8_t     hash[SHA256_DIGEST_LENGTH];
 } block_t;
 
+/**
+ * hblk_file_s - block file format
+ * @hblk_magic: identifies file as valid serialized blockchain
+ * @hblk_version: identifies version at which the blockchain has been serialized
+ * @hblk_endian: byte to signify little or big endianness
+ * @hblk_blocks: number of blocks in the blockchain
+ */
+typedef struct hblk_file_s
+{
+    int8_t hblk_magic;
+    int8_t hblk_version[3];
+    int8_t hblk_endian;
+    int32_t hblk_blocks;
+} hblk_file_t;
+
 
 blockchain_t *blockchain_create(void);
 block_t *block_create(block_t const *prev, int8_t const *data, uint32_t data_len);
