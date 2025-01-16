@@ -93,7 +93,7 @@ typedef struct block_s
  */
 typedef struct hblk_file_s
 {
-    int8_t hblk_magic;
+    int8_t hblk_magic[4];
     int8_t hblk_version[3];
     int8_t hblk_endian;
     int32_t hblk_blocks;
