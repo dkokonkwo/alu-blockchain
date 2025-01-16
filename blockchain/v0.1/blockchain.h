@@ -13,6 +13,9 @@
 #include <openssl/sha.h>
 #include "provided/endianness.h"
 
+#include <fcntl.h>
+#include <unistd.h>
+
 #define BLOCKCHAIN_DATA_MAX 1024
 #define HBLK_MAGIC "HBLK"
 #define HBLK_VERSION "0.1"
