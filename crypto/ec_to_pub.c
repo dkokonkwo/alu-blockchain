@@ -4,10 +4,8 @@
 
 /**
  * ec_to_pub - extracts the public key from an EC_KEY struct.
- *
  * @key: Pointer to the EC_KEY struct.
- * @pub: Address at whcih to store the extracted public key.
- *
+ * @pub: Address at which to store the extracted public key.
  * Return: Pointer to @pub or NULL upon failure
  */
 uint8_t *ec_to_pub(EC_KEY const *key, uint8_t pub[EC_PUB_LEN])
