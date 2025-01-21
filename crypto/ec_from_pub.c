@@ -4,7 +4,6 @@
  * ec_from_pub - generates EC_KEY from pub key.
  * @pub: the pub key in buffer.
  * Return: Pointer to generated EC_KEY struct or NULL.
- * Author: Frank Onyema Orji.
  */
 EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 {
