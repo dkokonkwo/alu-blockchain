@@ -161,4 +161,7 @@ typedef struct blockchain_s
 } blockchain_t;
 
 
+/* FUNCTIONS */
+tx_out_t *tx_out_create(uint32_t amount, uint8_t const pub[EC_PUB_LEN]);
+
 #endif /* blockchain.h */
