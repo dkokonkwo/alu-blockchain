@@ -17,8 +17,8 @@ size_t data_len;
 uint8_t *_buf, *buf;
 if (!transaction)
 return (NULL);
-data_len = SHA256_DIGEST_LENGTH * 3 * llist_size(transaction->inputs) +
-SHA256_DIGEST_LENGTH * llist_size(transaction->outputs);
+data_len = SHA256_DIGEST_LENGTH * 3 * llist_size(transaction->inputs)
++ SHA256_DIGEST_LENGTH * llist_size(transaction->outputs);
 _buf = buf = calloc(1, data_len);
 if (!_buf)
 return (NULL);
