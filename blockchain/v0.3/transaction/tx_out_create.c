@@ -10,7 +10,7 @@
 tx_out_t *tx_out_create(uint32_t amount, uint8_t const pub[EC_PUB_LEN])
 {
 tx_out_t *output;
-size_t hash_len;
+size_t data_len;
 if (!amount || !pub)
 return (NULL);
 output = (tx_out_t *)malloc(sizeof(tx_out_t));
@@ -18,7 +18,7 @@ if (!output)
 return (NULL);
 output->amount = amount;
 memcpy(output->pub, pub, EC_PUB_LEN);
-hash_len = sizeof(output->hash);
-sha256((const int8_t *)output, hash_len, output->hash);
-return output;
+data_len = sizeof(output->amount) + EC_PUB_LEN;
+sha256((const int8_t *)output, data_len, output->hash);
+return (output);
 }
