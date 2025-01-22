@@ -9,7 +9,6 @@
  * @msglen: length of msg.
  * @sig: points to the signature to be checked.
  * Return: 1 if the signature is valid, and 0 otherwise.
- * Author: Frank Onyema Orji.
  */
 int ec_verify(EC_KEY const *key, uint8_t const *msg,
 		size_t msglen, sig_t const *sig)

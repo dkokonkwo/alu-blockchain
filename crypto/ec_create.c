@@ -4,7 +4,6 @@
  * ec_create - create a new EC key pair.
  *
  * Return: Pointer to the created EC key pair,or NULL upon failure.
- * Author: Frank Onyema Orji.
  */
 EC_KEY *ec_create(void)
 {

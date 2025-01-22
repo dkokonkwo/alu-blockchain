@@ -7,7 +7,6 @@
  * @msg: points to the characters to be signed
  * @msglen: length of msg
  * @sig: holds the address at which to store the signature
- * Author: Frank Onyema Orji.
  * Return: pointer to the signature buffer upon success, NULL on failure
  */
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,

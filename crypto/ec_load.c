@@ -5,7 +5,6 @@
  * @folder: path to the folder in which to save the keys
  * Return: return a pointer to the created EC key pair
  * upon success, or NULL upon failure
- * Author: Frank Onyema Orji.
  */
 EC_KEY *ec_load(char const *folder)
 {
