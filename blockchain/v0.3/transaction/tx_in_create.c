@@ -17,5 +17,6 @@ return (NULL);
 memcpy(input->block_hash, unspent->block_hash, SHA256_DIGEST_LENGTH);
 memcpy(input->tx_id, unspent->tx_id, SHA256_DIGEST_LENGTH);
 memcpy(input->tx_out_hash, unspent->out.hash, SHA256_DIGEST_LENGTH);
+input->sig.len = NULL;
 return (input);
 }
