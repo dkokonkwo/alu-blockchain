@@ -11,7 +11,7 @@ tx_in_t *tx_in_create(unspent_tx_out_t const *unspent)
 tx_in_t *input;
 if (!unspent)
 return (NULL);
-input = calloc(1, sizeof(input));
+input = calloc(1, sizeof(*input));
 if (!input)
 return (NULL);
 memcpy(input->block_hash, unspent->block_hash, SHA256_DIGEST_LENGTH);
