@@ -16,15 +16,15 @@ uint8_t hash_buf[SHA256_DIGEST_LENGTH])
 size_t data_len;
 uint8_t *_buf, *buf;
 if (!transaction)
-    return (NULL);
+return (NULL);
 data_len = SHA256_DIGEST_LENGTH * 3 * llist_size(transaction->inputs) + SHA256_DIGEST_LENGTH * llist_size(transaction->outputs);
 _buf = buf = calloc(1, data_len);
 if (!_buf)
-    return (NULL);
+return (NULL);
 llist_for_each(transaction->inputs, hash_inputs, &buf);
 llist_for_each(transaction->outputs, hash_outputs, &buf);
-if (!sha256((const int8_t *)transaction, data_len, hash_buf))
-    hash_buf = NULL;
+if (!sha256((const int8_t *)_buf, data_len, hash_buf))
+hash_buf = NULL;
 free(_buf);
 return (hash_buf);
 }
