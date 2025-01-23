@@ -19,7 +19,7 @@ EC_KEY const *sender, llist_t *all_unspent)
         return (NULL);
     for (i = 0; i < llist_size(all_unspent); i++)
     {
-        utx = llist_get_node(all_unspent, i);
+        utx = llist_get_node_at(all_unspent, i);
         if (!memcmp(in->tx_out_hash, utx->out.hash, SHA256_DIGEST_LENGTH))
             break;
         utx = NULL;
