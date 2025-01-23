@@ -104,24 +104,24 @@ transaction_t *add_trans(EC_KEY const *sender, visitor_t *visitor,
 transaction_t *transaction_create(EC_KEY const *sender,
 EC_KEY const *receiver, uint32_t amount, llist_t *all_unspent)
 {
-    uint8_t sender_pub[EC_PUB_LEN], recv_pub[EC_PUB_LEN];
-    visitor_t visitor = {0};
-    transaction_t *trans;
-    if (!sender || !receiver || !all_unspent || !amount)
-        return (NULL);
-    if (!ec_to_pub(sender, sender_pub) || !ec_to_pub(receiver, recv_pub))
-        return (NULL);
-    visitor.sender_unspent = llist_create(MT_SUPPORT_FALSE);
-    if (!visitor.sender_unspent)
-        return (NULL);
-    visitor.amount = amount;
-    visitor.sender_pub = sender_pub;
-    llist_for_each(all_unspent, collect_sender_unspent, &visitor);
-    dprintf(2, "amount: %ld\n", visitor.total_amount);
-    if (visitor.total_amount < amount)
-        return (llist_destroy(visitor.sender_unspent, 0, NULL), NULL);
-    trans = calloc(1, sizeof(*trans));
-    if (!trans)
-    return (NULL);
-    return (add_trans(sender, &visitor, all_unspent, sender_pub, recv_pub, trans));
+uint8_t sender_pub[EC_PUB_LEN], recv_pub[EC_PUB_LEN];
+visitor_t visitor = {0};
+transaction_t *trans;
+if (!sender || !receiver || !all_unspent || !amount)
+return (NULL);
+if (!ec_to_pub(sender, sender_pub) || !ec_to_pub(receiver, recv_pub))
+return (NULL);
+visitor.sender_unspent = llist_create(MT_SUPPORT_FALSE);
+if (!visitor.sender_unspent)
+return (NULL);
+visitor.amount = amount;
+visitor.sender_pub = sender_pub;
+llist_for_each(all_unspent, collect_sender_unspent, &visitor);
+dprintf(2, "amount: %ld\n", visitor.total_amount);
+if (visitor.total_amount < amount)
+return (llist_destroy(visitor.sender_unspent, 0, NULL), NULL);
+trans = calloc(1, sizeof(*trans));
+if (!trans)
+return (NULL);
+return (add_trans(sender, &visitor, all_unspent, sender_pub, recv_pub, trans));
 }
