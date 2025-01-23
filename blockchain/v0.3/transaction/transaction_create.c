@@ -23,7 +23,7 @@ int map_output_to_input(llist_node_t node, unsigned int idx, void *arg)
 }
 
 /**
- * collect_sender_request - adds valid unpsent output to visitor
+ * collect_sender_unspent - adds valid unpsent output to visitor
  * @node: current node
  * @id: index of node
  * @arg: visitor struct
@@ -31,18 +31,18 @@ int map_output_to_input(llist_node_t node, unsigned int idx, void *arg)
  */
 int collect_sender_unspent(llist_node_t node, unsigned int id, void *arg)
 {
-    visitor_t *visitor = arg;
-    unspent_tx_out_t *untrans = node;
-    if (!memcmp(untrans->out.pub, visitor->sender_pub, EC_PUB_LEN))
-    {
-        if (llist_add_node(visitor->sender_unspent, node, ADD_NODE_REAR))
-            exit(1);
-        visitor->total_amount += untrans->out.amount;
-        if (visitor->total_amount >= visitor->amount)
-            return (0);
-    }
-    return (0);
-    (void)id;
+visitor_t *visitor = arg;
+unspent_tx_out_t *untrans = node;
+if (!memcmp(untrans->out.pub, visitor->sender_pub, EC_PUB_LEN))
+{
+if (llist_add_node(visitor->sender_unspent, node, ADD_NODE_REAR))
+exit(1);
+visitor->total_amount += untrans->out.amount;
+if (visitor->total_amount >= visitor->amount)
+return (0);
+}
+return (0);
+(void)id;
 }
 
 /**
