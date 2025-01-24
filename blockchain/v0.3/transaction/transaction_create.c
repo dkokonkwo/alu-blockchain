@@ -87,7 +87,7 @@ transaction_t *add_trans(EC_KEY const *sender, visitor_t *visitor,
 		if (!tx_in_sign(in, tx->id, sender, all_unspent))
 			exit(1);
 	}
-	/* delete unspent? */
+	/* delete unspent */
 	llist_destroy(visitor->sender_unspent, 0, NULL);
 	return (tx);
 }

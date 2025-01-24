@@ -91,6 +91,25 @@ typedef struct Visitor
 
 } visitor_t;
 
+/**
+ * struct Validation_Visitor - visitor struct for tx validation
+ * @in_amount: total txi amount
+ * @out_amount: total txo amount
+ * @valid: 1 if tx valid else 0
+ * @all_unspent: all unspent txs
+ * @tx: the tx to validate
+ * @block_index: the block index cointaining tx
+ */
+typedef struct Validation_Visitor
+{
+	long in_amount;
+	long out_amount;
+	int valid;
+	llist_t *all_unspent;
+	transaction_t const *tx;
+	uint32_t block_index;
+} validation_vistor_t;
+
 /* FUNCTIONS */
 tx_out_t *tx_out_create(uint32_t amount, uint8_t const pub[EC_PUB_LEN]);
 unspent_tx_out_t *unspent_tx_out_create(uint8_t block_hash[SHA256_DIGEST_LENGTH], uint8_t tx_id[SHA256_DIGEST_LENGTH], tx_out_t const *out);
@@ -98,4 +117,8 @@ tx_in_t *tx_in_create(unspent_tx_out_t const *unspent);
 uint8_t *transaction_hash(transaction_t const *transaction, uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
 sig_t *tx_in_sign(tx_in_t *in, uint8_t const tx_id[SHA256_DIGEST_LENGTH], EC_KEY const *sender, llist_t *all_unspent);
 transaction_t *transaction_create(EC_KEY const *sender, EC_KEY const *receiver, uint32_t amount, llist_t *all_unspent);
+int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent);
+transaction_t *coinbase_create(EC_KEY const *receiver, uint32_t block_index);
+int coinbase_is_valid(transaction_t const *coinbase, uint32_t block_index);
+void transaction_destroy(transaction_t *transaction);
 #endif /* transaction.h */
