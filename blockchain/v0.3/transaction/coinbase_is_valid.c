@@ -6,7 +6,6 @@
  * @buf: the buffer to check.
  * @size: size of buffer.
  * Return: 1 if empty else 0.
- * Author: Frank Onyema Orji.
  */
 int is_empty(uint8_t *buf, size_t size)
 {

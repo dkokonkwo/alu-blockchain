@@ -4,7 +4,6 @@
 /**
  * transaction_destroy - frees tx structure.
  * @transaction: tx struct to free.
- * Author: Frank Onyema Orji.
  */
 void transaction_destroy(transaction_t *transaction)
 {
