@@ -1,4 +1,5 @@
 #include "blockchain.h"
+#include "transaction/transaction.h"
 
 /**
  * hash_tx_ids - llist action func to hash outputs

@@ -83,9 +83,10 @@ typedef struct blockchain_s
  */
 typedef struct block_s
 {
-    block_info_t    info; /* This must stay first */
-    block_data_t    data; /* This must stay second */
-    uint8_t     hash[SHA256_DIGEST_LENGTH];
+	block_info_t	info; /* This must stay first */
+	block_data_t	data; /* This must stay second */
+	llist_t *transactions;
+	uint8_t	 hash[SHA256_DIGEST_LENGTH];
 } block_t;
 
 /**
