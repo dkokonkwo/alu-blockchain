@@ -1,7 +1,6 @@
 #ifndef BLOCKCHAIN_H
 #define BLOCKCHAIN_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -10,7 +9,6 @@
 #include <stdint.h>
 #include <llist.h>
 #include "../../crypto/hblk_crypto.h"
-#include "transaction/transaction.h"
 
 #include <openssl/sha.h>
 #include "provided/endianness.h"
@@ -19,9 +17,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-
 #define BLOCKCHAIN_DATA_MAX 1024
-
+#define HBLK_MAGIC "HBLK"
+#define HBLK_VERSION "0.1"
 
 /**
  * struct block_info_s - Block info structure
@@ -51,6 +49,7 @@ typedef struct block_info_s
 
 /**
  * struct block_data_s - Block data
+ *
  * @buffer: Data buffer
  * @len:    Data size (in bytes)
  */
@@ -64,36 +63,57 @@ typedef struct block_data_s
     uint32_t    len;
 } block_data_t;
 
+
+/**
+ * struct blockchain_s - Blockchain structure
+ *
+ * @chain: Linked list of pointers to block_t
+ */
+typedef struct blockchain_s
+{
+    llist_t     *chain;
+} blockchain_t;
+
 /**
  * struct block_s - Block structure
  *
- * @info:         Block info
- * @data:         Block data
- * @transactions: List of transactions
- * @hash:         256-bit digest of the Block, to ensure authenticity
+ * @info: Block info
+ * @data: Block data
+ * @hash: 256-bit digest of the Block, to ensure authenticity
  */
 typedef struct block_s
 {
     block_info_t    info; /* This must stay first */
     block_data_t    data; /* This must stay second */
-    llist_t     *transactions;
     uint8_t     hash[SHA256_DIGEST_LENGTH];
 } block_t;
 
 /**
- * struct blockchain_s - Blockchain structure
- *
- * @chain:   Linked list of Blocks
- * @unspent: Linked list of unspent transaction outputs
+ * hblk_file_s - block file format
+ * @hblk_magic: identifies file as valid serialized blockchain
+ * @hblk_version: identifies version at which the blockchain has been serialized
+ * @hblk_endian: byte to signify little or big endianness
+ * @hblk_blocks: number of blocks in the blockchain
  */
-typedef struct blockchain_s
+typedef struct hblk_file_s
 {
-    llist_t     *chain;
-    llist_t     *unspent;
-} blockchain_t;
+    int8_t hblk_magic[4];
+    int8_t hblk_version[3];
+    int8_t hblk_endian;
+    int32_t hblk_blocks;
+} hblk_file_t;
 
 
-/* FUNCTIONS */
+blockchain_t *blockchain_create(void);
+block_t *block_create(block_t const *prev, int8_t const *data, uint32_t data_len);
+void block_destroy(block_t *block);
+void blockchain_destroy(blockchain_t *blockchain);
+uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
+int blockchain_serialize(blockchain_t const *blockchain, char const *path);
+int block_serialize(llist_node_t nptr, int idx, void *arg);
+blockchain_t *blockchain_deserialize(char const *path);
+llist_t *deserialize_blocks(int fd, uint32_t size, uint8_t endianness);
+int block_is_valid(block_t const *block, block_t const *prev_block);
 
-
-#endif /* blockchain.h */
+extern block_t const _genesis;
+#endif /* BLOCKCHAIN_H */
