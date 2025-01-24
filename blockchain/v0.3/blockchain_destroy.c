@@ -1,23 +1,14 @@
 #include "blockchain.h"
 
 /**
- * blockchain_destroy - deletes and existing blockchain
- * @blockchain: pointer to blockchain structure to delete
- * Return: Nothing
+ * blockchain_destroy - frees an entire chain of blocks
+ * @blockchain: pointer to chain struct
  */
 void blockchain_destroy(blockchain_t *blockchain)
 {
-block_t *current, *temp;
-if (!blockchain)
-return;
-current = llist_pop(blockchain->chain);
-while (current)
-{
-temp = current;
-block_destroy(temp);
-current = llist_pop(blockchain->chain);
-}
-llist_destroy(blockchain->chain, 0, NULL);
-free(blockchain);
-return;
+	if (!blockchain)
+		return;
+	llist_destroy(blockchain->chain, 1, (void (*)(llist_node_t))block_destroy);
+	llist_destroy(blockchain->unspent, 1, free);
+	free(blockchain);
 }
