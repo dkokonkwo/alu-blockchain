@@ -10,10 +10,11 @@ uint64_t nonce = 0;
 uint8_t hash[SHA256_DIGEST_LENGTH];
 if (!block)
 return;
-block->info.nonce = nonce;
+
 do {
+block->info.nonce = nonce;
 block_hash(block, hash);
-block->info.nonce++;
+nonce++;
 } while (!hash_matches_difficulty(hash, block->info.difficulty));
 
 memcpy(block->hash, hash, SHA256_DIGEST_LENGTH);
