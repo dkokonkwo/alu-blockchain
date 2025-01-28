@@ -119,4 +119,5 @@ extern block_t const _genesis;
 
 /* blockchain mining */
 int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH], uint32_t difficulty);
+void block_mine(block_t *block);
 #endif /* BLOCKCHAIN_H */
