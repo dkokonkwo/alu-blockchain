@@ -14,4 +14,5 @@ block_hash(block, hash);
 block->info.nonce++;
 } while (!hash_matches_difficulty(hash, block->info.difficulty));
 
+memcpy(block->hash, hash, SHA256_DIGEST_LENGTH);
 }
