@@ -9,15 +9,26 @@
 int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 uint32_t difficulty)
 {
-uint32_t i;
-if (!hash || !difficulty)
+uint32_t byte_index, bit_index;
+uint32_t total_bits = SHA256_DIGEST_LENGTH * 8;
+uint8_t mask;
+if (!hash || difficulty > total_bits)
 return (0);
 
-for (i = 0; i < difficulty; i++)
+/* checking leading zero bytes */
+for (byte_index = 0; difficulty >= 8 && byte_index < SHA256_DIGEST_LENGTH;
+byte_index++, difficulty -= 8)
 {
-if (hash[i] != 0)
+if (hash[byte_index] != 0)
 return (0);
 }
 
+/* checking the remaining zero bits */
+if (difficulty > 0)
+{
+mask = 0xFF << (8 - difficulty); /* mask for the remaining bits */
+if ((hash[byte_index] & mask) != 0)
+return (0);
+}
 return (1);
 }
