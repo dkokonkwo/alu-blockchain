@@ -21,12 +21,12 @@ return (lblock->info.difficulty);
 
 cblock = llist_get_node_at(blockchain->chain, lblock->info.index + 1 -
 DIFFICULTY_ADJUSTMENT_INTERVAL);
-expected = BLOCK_GENERATION_INTERVAL *DIFFICULTY_ADJUSTMENT_INTERVAL;
+expected = BLOCK_GENERATION_INTERVAL *
+DIFFICULTY_ADJUSTMENT_INTERVAL;
 actual = lblock->info.timestamp - cblock->info.timestamp;
-if (actual > 2 * expected)
-return (lblock->info.difficulty > 0 ? lblock->info.difficulty - 1 : 0);
-else if (actual * 2 < expected)
+if (actual * 2 < expected)
 return (lblock->info.difficulty + 1);
-else
+else if (actual > 2 * expected)
+return (lblock->info.difficulty > 0 ? lblock->info.difficulty - 1 : 0);
 return (lblock->info.difficulty);
 }
