@@ -116,4 +116,7 @@ llist_t *deserialize_blocks(int fd, uint32_t size, uint8_t endianness);
 int block_is_valid(block_t const *block, block_t const *prev_block);
 
 extern block_t const _genesis;
+
+/* blockchain mining */
+int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH], uint32_t difficulty);
 #endif /* BLOCKCHAIN_H */
