@@ -6,9 +6,11 @@
  */
 void block_mine(block_t *block)
 {
+uint64_t nonce = 0;
 uint8_t hash[SHA256_DIGEST_LENGTH];
 if (!block)
 return;
+block->info.nonce = nonce;
 do {
 block_hash(block, hash);
 block->info.nonce++;
