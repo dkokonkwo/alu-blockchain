@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+cp v0.1/blockchain_create.c v0.2
+cp v0.1/blockchain_deserialize.c v0.2
+cp v0.1/blockchain_destroy.c v0.2
+cp v0.1/blockchain.h v0.2
+cp v0.1/blockchain_serialize.c v0.2
+cp v0.1/block_create.c v0.2
+cp v0.1/block_destroy.c v0.2
+cp v0.1/block_hash.c v0.2
+cp v0.1/block_is_valid.c v0.2

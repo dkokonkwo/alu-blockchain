@@ -7,7 +7,6 @@
  * @idx: index of node
  * @arg: pointer to address to write to
  * Return: 0 if success else 1.
- * Author: Frank Onyema Orji.
  */
 int hash_tx_ids(llist_node_t node, unsigned int idx, void *arg)
 {

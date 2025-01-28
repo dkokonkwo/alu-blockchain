@@ -1,4 +1,5 @@
 #include "blockchain.h"
+#include "transaction/transaction.h"
 
 #define CLEAN_UP (free(chain), close(fd))
 #define CLEAN_UP_BLOCKS (free(block), llist_destroy(list, 1, NULL))
