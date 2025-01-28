@@ -16,7 +16,7 @@ lblock = llist_get_tail(blockchain->chain);
 if (!lblock)
 return (0);
 if (lblock->info.index == 0 || lblock->info.index %
-BLOCK_GENERATION_INTERVAL)
+DIFFICULTY_ADJUSTMENT_INTERVAL)
 return (lblock->info.difficulty);
 
 cblock = llist_get_node_at(blockchain->chain, lblock->info.index + 1 -
