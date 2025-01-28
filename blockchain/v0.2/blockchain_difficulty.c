@@ -10,11 +10,11 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 block_t *lblock, *cblock;
 uint64_t expected, actual;
 if (!blockchain)
-return (NULL);
+return (0);
 
 lblock = llist_get_tail(blockchain->chain);
 if (!lblock)
-return (NULL);
+return (0);
 if (lblock->info.index == 0 || lblock->info.index %
 BLOCK_GENERATION_INTERVAL)
 return (lblock->info.difficulty);
